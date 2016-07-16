@@ -8,11 +8,9 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] Text life;
     [SerializeField] GameObject racket;
-    [SerializeField]
-    GameObject DeadZone;
     [SerializeField] Text levelText;
 
-    Vector3 originalPosition = new Vector3(0, -13, 0);
+    Vector3 originalPosition = new Vector3(7, -13, 0);
     Vector3 racketOriginalPosition = new Vector3(0, -14, 0);
 
     private float speed = 25f;
@@ -26,8 +24,19 @@ public class Ball : MonoBehaviour
 
         GetComponent<Rigidbody2D>().velocity = Vector2.up * speed;
         //life.text = string.Format("Life {0}", lifeCount);
-
 	}
+
+    void Update()
+    {
+        Vector3 pos = transform.position;
+        if (pos.y <= -14)
+        {
+            lifeCount--;
+            if (lifeCount == 0)
+                Debug.Log("Game Over");
+            Restart();
+        } 
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -38,21 +47,6 @@ public class Ball : MonoBehaviour
             Vector2 dir = new Vector2(x, 1).normalized;
 
             GetComponent<Rigidbody2D>().velocity = dir * speed;
-        }
-
-        if(col.gameObject.CompareTag("DeadZone"))
-        {
-            lifeCount--;
-            if (lifeCount < 1)
-            {
-                Reset();
-                Debug.Log("Game Over");
-            }
-            else
-            {
-                SetLifeText();
-                Restart();
-            }
         }
     }
 
