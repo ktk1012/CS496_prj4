@@ -15,12 +15,14 @@ public class active1 : MonoBehaviour
     {
         if (fst)
         {
-            transform.position = new Vector3(7, 12, 0);
+            transform.position = new Vector3(7, 13, 0);
             fst = false;
         }
-
-        if (!isValidGridPos())
-            Debug.Log("GAME OVER");
+	
+		if (!isValidGridPos ()) {
+			
+			Debug.Log ("GAME OVER");
+		}
     }
 
     bool isValidGridPos()
