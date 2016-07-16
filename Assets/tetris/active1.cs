@@ -15,7 +15,7 @@ public class active1 : MonoBehaviour
     {
         if (fst)
         {
-            transform.position = new Vector3(0, 12, 0);
+            transform.position = new Vector3(7, 12, 0);
             fst = false;
         }
 
@@ -28,8 +28,6 @@ public class active1 : MonoBehaviour
         foreach (Transform child in transform)
         {
             Vector2 v = Grid.roundVec2(child.position);
-            if (child == transform)
-                continue;
             // Not inside Border?
             if (!Grid.insideBorder(v))
                 return false;
@@ -78,7 +76,6 @@ public class active1 : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.E)) // rotate 
         {
-            lastFall = Time.time;
             transform.Rotate(0, 0, -90);
             // See if valid
             if (isValidGridPos())
@@ -91,7 +88,6 @@ public class active1 : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.F)) // right
         {
-            lastFall = Time.time;
             transform.position += new Vector3(1, 0, 0);
             rightbutton.right = false;
 
@@ -106,29 +102,32 @@ public class active1 : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.D) || Time.time - lastFall >= 1)
         {
-            Debug.Log("???");
-            lastFall = Time.time;
             transform.position += new Vector3(0, -1, 0);
-            lastFall = Time.time;
             if (isValidGridPos())
             {
                 updateGrid();
             }
             else
             {
+				Debug.Log ("Invalid");
                 transform.position += new Vector3(0, 1, 0);
 
                 Grid.deleteFullRows();
 
                 call = true;
+
+
                 // activate
                 next.curblk = next.nextblk;
                 FindObjectOfType<next>().active(next.curblk);
                 // create the next 
                 next.nextblk = FindObjectOfType<next>().inactive();
+
+
+				enabled = false;
             }
+			lastFall = Time.time;
         }
-        Debug.Log(lastFall.ToString());
     }
 }
     
