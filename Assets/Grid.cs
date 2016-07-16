@@ -8,6 +8,7 @@ public class Grid : MonoBehaviour
     public static int w = 15;
     public static int h = 16;
     public static Transform[,] grid = new Transform[w, h];
+    public static bool getStronger;
 
     /* round the vector */
     public static Vector2 roundVec2(Vector2 v)
@@ -28,8 +29,9 @@ public class Grid : MonoBehaviour
         for (int x = 0; x < w; ++x)
         {
             if (grid[x, y].gameObject != null)
-                Destroy(grid[x, y].gameObject);
-            grid[x, y] = null;
+            {
+                getStronger = true;
+            }
         }
     }
 
