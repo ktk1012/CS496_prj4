@@ -29,12 +29,11 @@ public class Ball : MonoBehaviour
     void Update()
     {
         Vector3 pos = transform.position;
-//        Debug.Log("Game Over");
         if (pos.y <= -13)
         {
             lifeCount--;
-			if (lifeCount == 0)
-				Destroy (gameObject);
+            if (lifeCount == 0)
+	        Destroy (gameObject);
             Restart();
         } 
     }
