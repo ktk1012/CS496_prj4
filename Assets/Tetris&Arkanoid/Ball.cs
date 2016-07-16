@@ -29,7 +29,8 @@ public class Ball : MonoBehaviour
     void Update()
     {
         Vector3 pos = transform.position;
-        if (pos.y <= -14)
+        Debug.Log("Game Over");
+        if (pos.y <= -13)
         {
             lifeCount--;
             if (lifeCount == 0)
