@@ -23,10 +23,17 @@ public class Grid : MonoBehaviour
         return (((int)pos.x > -1 && (int)pos.x < w && (int)pos.y > 0));
     }
 
+    public static void nullify(Vector2 pos)
+    {
+        Debug.Log("1");
+        Debug.Log(pos.x.ToString());
+        grid[(int)pos.x, (int)pos.y] = null;
+    }
+
     /* if the player fills every entry in a row, the row should be deleted */
     public static void deleteRow(int y)
     {
-        for (int x = 0; x < w; ++x)
+        for (int x = 0; x < w; x++)
         {
             if (grid[x, y].gameObject != null)
             {
@@ -39,7 +46,7 @@ public class Grid : MonoBehaviour
      * the bottom by one unit */
     public static void decreaseRow(int y)
     {
-        for (int x = 0; x < w; ++x)
+        for (int x = 0; x < w; x++)
         {
             if (grid[x, y] != null)
             {   /* move one towards bottom */
@@ -54,13 +61,13 @@ public class Grid : MonoBehaviour
 
     public static void decreaseRowsAbove(int y)
     {
-        for (int i = y; i < h; ++i)
+        for (int i = y; i < h; i++)
             decreaseRow(i);
     }
 
     public static bool isRowFull(int y)
     {
-        for (int x = 0; x < w; ++x)
+        for (int x = 0; x < w; x++)
         {
             if (grid[x, y] == null)
             {
@@ -72,7 +79,7 @@ public class Grid : MonoBehaviour
 
     public static void deleteFullRows()
     {
-        for (int y = 1; y < h; ++y)
+        for (int y = 1; y < h; y++)
         {
             if (isRowFull(y))
             {
