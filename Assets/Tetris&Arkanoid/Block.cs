@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Block : MonoBehaviour {
-    private static int mLife = 1;
+    private static int mLife;
+
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
@@ -25,7 +26,7 @@ public class Block : MonoBehaviour {
         {
             Destroy(gameObject);
             Vector3 v = transform.position;
-            Grid.grid[(int)v.x, (int)v.y] = null;
+            Grid.nullify(new Vector2 (Mathf.Round(v.x), Mathf.Round(v.y)));
         }
 
         if (Grid.getStronger)
